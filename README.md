@@ -35,8 +35,9 @@ docker-compose up
 ```
 cp .env .env1
 ```
+5. Modify the .env file port
 
-5. Run docker-compose
+6. Run docker-compose
 ```
 docker-compose --env-file .env1 --project-name app1 up
 ```
