@@ -42,7 +42,7 @@ cp .env .env1
 docker-compose --env-file .env1 --project-name app1 up
 ```
 
-6. If more instance is needed, repeat step 4 and 5 but change the number (e.g. `.env1` and `app1` to `.env2` and `app2`)
+7. If more instance is needed, repeat step 4 and 5 but change the number (e.g. `.env1` and `app1` to `.env2` and `app2`)
 
 ## Running an instance
 
