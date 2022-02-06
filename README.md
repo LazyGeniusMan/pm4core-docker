@@ -13,6 +13,36 @@ This build has no enterprise packages.
   - If using Docker Desktop, Compose is already included
   - For all others: [Install Instructions](https://docs.docker.com/compose/install/)
 
+## Running a customize env instance
+1. Clone or download this repo
+
+2. Modify the .env file
+
+3. Build local docker image
+```
+docker build --build-arg PM_VERSION=4.1.21 -t processmaker/pm4-core:local .
+```
+
+Note: You could change `PM_VERSION`, but I've only tested `4.1.21`.
+
+4. Run docker-compose
+```
+docker-compose up
+```
+
+### Run multiple instance
+4. Duplicate the .env file
+```
+cp .env .env1
+```
+
+5. Run docker-compose
+```
+docker-compose --env-file .env1 --project-name app1 up
+```
+
+6. If more instance is needed, repeat step 4 and 5 but change the number (e.g. `.env1` and `app1` to `.env2` and `app2`)
+
 ## Running an instance
 
 1. Clone or download this repo
