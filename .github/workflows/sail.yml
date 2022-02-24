@@ -42,9 +42,10 @@ jobs:
           laravelsail/php74-composer:latest \
           bash -c "laravel new example-app && cd example-app && php ./artisan sail:install --with=mysql,redis "
           cd example-app
+          ls
           #composer require laravel/sail --dev
           #composer update
           #php artisan sail:install
-      - uses: actions/upload-artifact@v2.3.1
-        with:
-          path: .
+#      - uses: actions/upload-artifact@v2.3.1
+#        with:
+#          path: .
