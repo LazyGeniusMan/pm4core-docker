@@ -42,6 +42,7 @@ jobs:
           laravelsail/php74-composer:latest \
           bash -c "laravel new example-app && cd example-app && php ./artisan sail:install --with=mysql,redis "
           cd example-app
+          pwd
           ls
           #composer require laravel/sail --dev
           #composer update
