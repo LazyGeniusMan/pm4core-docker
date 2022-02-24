@@ -17,10 +17,9 @@ jobs:
           php-version: '7.4'
       - name: Copy .env
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
-      - name: Install Dependencies
-        run: composer install --no-dev
-      - name: Generate key
-        run: php artisan key:generate
+      - name: test
+        run: |
+          rm -rf composer.lock
       - name: Install Sail
         run: |
           composer require laravel/sail --dev
