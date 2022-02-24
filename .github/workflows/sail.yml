@@ -7,10 +7,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-        with:
-          repository: processmaker/processmaker
-          ref: refs/tags/v4.1.21
+#      - uses: actions/checkout@v2
+#        with:
+#          repository: processmaker/processmaker
+#          ref: refs/tags/v4.1.21
       - name: Setup PHP
         uses: shivammathur/setup-php@2.17.0
         with:
@@ -25,15 +25,16 @@ jobs:
 #          rm -rf composer.lock
       - name: Install Sail
         run: |
-          #sed 's/\~5\.7\.0\|\~5\.8\.0\|\^6\.0/\^8\.0/g' composer.lock
-          #sed 's/6\.18\.31\|\^7\.22\.4/\^8\.0/g' composer.lock
-          #sed 's/\~5\.4\.0\|\~5\.5\.0\|\~5\.6\.0\|\~5\.7\.0\|\~5\.8\.0\|\^6\.0\|\^7\.0/\^8\.0/g' composer.lock
-          #sed 's/\~5\.0/\^8\.0/g' composer.lock
-          #sed 's/\~\5\.4\|\^6\.0\|\^7\.0/\^8\.0/g' composer.lock
-          #sed 's/\>\= 5\.4\.0/\^8\.0/g' composer.lock
-          rm -rf composer.lock
-          wget http://0x0.st/oK_1.lock
-          mv oK_1.lock composer.lock
+#          #sed 's/\~5\.7\.0\|\~5\.8\.0\|\^6\.0/\^8\.0/g' composer.lock
+#          #sed 's/6\.18\.31\|\^7\.22\.4/\^8\.0/g' composer.lock
+#          #sed 's/\~5\.4\.0\|\~5\.5\.0\|\~5\.6\.0\|\~5\.7\.0\|\~5\.8\.0\|\^6\.0\|\^7\.0/\^8\.0/g' composer.lock
+#          #sed 's/\~5\.0/\^8\.0/g' composer.lock
+#          #sed 's/\~\5\.4\|\^6\.0\|\^7\.0/\^8\.0/g' composer.lock
+#          #sed 's/\>\= 5\.4\.0/\^8\.0/g' composer.lock
+#          rm -rf composer.lock
+#          wget http://0x0.st/oK_1.lock
+#          mv oK_1.lock composer.lock
+          curl -s "https://laravel.build/example-app?with=mysql,redis" | bash
           composer require laravel/sail --dev
           composer update
           php artisan sail:install
