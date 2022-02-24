@@ -49,4 +49,4 @@ jobs:
           #php artisan sail:install
       - uses: actions/upload-artifact@v2.3.1
         with:
-          path: /home/runner/work/pm4core-docker/pm4core-docker/example-app/*
+          path: /home/runner/work/pm4core-docker/pm4core-docker/example-app/docker-compose.yml
