@@ -17,6 +17,10 @@ jobs:
           php-version: '7.4'
       - name: Copy .env
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      - name: Test
+        run: |
+          rm -rf composer.json
+          rm -rf composer.lock
       - name: Install Dependencies
         run: composer install
       - name: Generate key
