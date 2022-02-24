@@ -28,6 +28,6 @@ jobs:
 #          composer require laravel/sail --dev
 #          composer update
           php artisan sail:install
-#      - uses: actions/upload-artifact@v2.3.1
-#        with:
-#          path: .
+      - uses: actions/upload-artifact@v2.3.1
+        with:
+          path: .
