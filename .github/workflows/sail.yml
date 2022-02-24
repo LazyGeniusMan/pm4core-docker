@@ -51,4 +51,4 @@ jobs:
         with:
           path: |
             /home/runner/work/pm4core-docker/pm4core-docker/example-app/docker-compose.yml
-            /home/runner/work/pm4core-docker/pm4core-docker/example-app/vendor/laravel/sail/runtimes/8.1
+            /home/runner/work/pm4core-docker/pm4core-docker/example-app/vendor/laravel/sail/runtimes/7.4
