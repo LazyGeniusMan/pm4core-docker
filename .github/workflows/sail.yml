@@ -34,10 +34,17 @@ jobs:
           #rm -rf composer.lock
           #wget http://0x0.st/oK_1.lock
           #mv oK_1.lock composer.lock
-          curl -s "https://laravel.build/example-app?with=mysql,redis" | bash
-          composer require laravel/sail --dev
-          composer update
-          php artisan sail:install
+          #curl -s "https://laravel.build/example-app?with=mysql,redis" | bash
+          docker info > /dev/null 2>&1
+          docker run --rm \
+          -v "$(pwd)":/opt \
+          -w /opt \
+          laravelsail/php74-composer:latest \
+          bash -c "laravel new example-app && cd example-app && php ./artisan sail:install --with=mysql,redis "
+          cd example-app
+          #composer require laravel/sail --dev
+          #composer update
+          #php artisan sail:install
       - uses: actions/upload-artifact@v2.3.1
         with:
           path: .
