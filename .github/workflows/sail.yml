@@ -11,7 +11,21 @@ jobs:
         with:
           repository: processmaker/processmaker
           ref: refs/tags/v4.1.21
-
+      - name: Setup PHP
+        uses: shivammathur/setup-php@2.17.0
+        with:
+          # Setup PHP version.
+          php-version: 7.4
+          # Setup PHP extensions.
+          extensions: # optional
+          # Set base ini file.
+          ini-file: # optional, default is production
+          # Add values to php.ini.
+          ini-values: # optional
+          # Setup code coverage driver.
+          coverage: # optional
+          # Setup popular tools globally.
+          tools: # optional
       - name: Install Sail
         run: |
           composer require laravel/sail --dev
