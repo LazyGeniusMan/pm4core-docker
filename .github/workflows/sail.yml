@@ -1,0 +1,21 @@
+name: Sail
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          repository: processmaker/processmaker
+          ref: refs/tags/v4.1.21
+
+      - name: Install Sail
+        run: |
+          composer require laravel/sail --dev
+          php artisan sail:install
+      - uses: actions/upload-artifact@v2.3.1
+        with:
+          path: .
