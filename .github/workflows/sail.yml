@@ -23,11 +23,11 @@ jobs:
 #      - name: test
 #        run: |
 #          rm -rf composer.lock
-#      - name: Install Sail
-#        run: |
+      - name: Install Sail
+        run: |
 #          composer require laravel/sail --dev
 #          composer update
-#          php artisan sail:install
+          php artisan sail:install
 #      - uses: actions/upload-artifact@v2.3.1
 #        with:
 #          path: .
