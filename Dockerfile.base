@@ -17,8 +17,8 @@ RUN apt -y install nodejs
 #
 # install composer
 # 
-RUN wget -O composer-setup.php https://getcomposer.org/installer
-RUN php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+RUN curl -sS https://getcomposer.org/installer | php && \
+    mv /tmp/composer.phar /usr/local/bin/composer
 RUN composer self-update
 
 #
