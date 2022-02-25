@@ -18,5 +18,6 @@ jobs:
       run: docker build . --file Dockerfile.base --tag pm-base:4.1-test
     - name: Check Image
       run: |
+        docker pull processmaker/base:1.0.0
         docker image ls
-        docker system df -v
+        docker image inspect pm4-base:4.1-test
