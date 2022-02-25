@@ -17,4 +17,6 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile.base --tag pm-base:4.1-test
     - name: Check Image
-      run: docker image ls
+      run: |
+        docker image ls
+        docker system df -v
