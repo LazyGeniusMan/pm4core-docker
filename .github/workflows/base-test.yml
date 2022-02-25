@@ -3,7 +3,8 @@ name: Docker Image CI
 on:
   push:
     paths:
-      Dockerfile.base
+      - Dockerfile.base
+      - .github/workdlows/base-test.yml
 
 jobs:
 
