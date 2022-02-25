@@ -16,16 +16,20 @@
 					"databasePath": "/database/laravel-echo-server.sqlite"
 			}
 	},
-	"protocol": "http",
+	"protocol": "https",
 	"socketio": {},
+	"sslCertPath": "/etc/nginx/ssl/custom.crt",
+	"sslKeyPath": "/etc/nginx/ssl/custom.key",
+	"sslCertChainPath": "",
+	"sslPassphrase": "",
 	"subscribers": {
-			"http": true,
-			"redis": true
+		"http": true,
+		"redis": true
 	},
 	"apiOriginAllow": {
-			"allowCors": false,
-			"allowOrigin": "",
-			"allowMethods": "",
-			"allowHeaders": ""
+		"allowCors": false,
+		"allowOrigin": "",
+		"allowMethods": "",
+		"allowHeaders": ""
 	}
 }

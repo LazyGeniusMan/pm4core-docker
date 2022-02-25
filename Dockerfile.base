@@ -6,7 +6,7 @@ RUN apt update
 
 # In ubuntu 20.04, installing php without specifying a version installs 7.4 :)
 RUN apt install -y php php-cli php-fpm php-json php-common php-mysql php-zip php-gd php-mbstring php-curl php-xml php-pear php-bcmath php-imagick php-dom php-sqlite3 \
-nginx vim curl unzip wget supervisor cron mysql-client build-essential
+nginx curl tar supervisor cron mysql-client build-essential
 
 #
 # node
@@ -20,12 +20,6 @@ RUN apt -y install nodejs
 RUN wget -O composer-setup.php https://getcomposer.org/installer
 RUN php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 RUN composer self-update
-
-#
-# cron
-#
-COPY build-files/laravel-cron /etc/cron.d/laravel-cron
-RUN chmod 0644 /etc/cron.d/laravel-cron && crontab /etc/cron.d/laravel-cron
 
 #
 # docker client
@@ -42,16 +36,9 @@ RUN curl -fsSLO https://download.docker.com/linux/static/stable/x86_64/docker-${
 RUN sed -i 's/www-data/root/g' /etc/php/7.4/fpm/pool.d/www.conf
 
 #
-# nginx 
+# clean up
 # 
-COPY build-files/nginx.conf /etc/nginx/nginx.conf
+RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-#
-# supervisord
-#
-COPY build-files/services.conf /etc/supervisor/conf.d/services.conf
-
-
-RUN mkdir -p /code/pm4
-WORKDIR /code/pm4
-EXPOSE 80 443 6001
+WORKDIR /var/www/html
+EXPOSE 80 443

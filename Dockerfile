@@ -1,16 +1,25 @@
-FROM processmaker/pm4-base:1.0.0
+FROM pm4-base:local
 
-ARG PM_VERSION
+ARG PM_VERSION=4.1.21
 
-WORKDIR /tmp
-RUN wget https://github.com/ProcessMaker/processmaker/archive/refs/tags/v${PM_VERSION}.zip
-RUN unzip v${PM_VERSION}.zip && rm -rf /code/pm4 && mv processmaker-${PM_VERSION} /code/pm4
+WORKDIR /var/www/html
+RUN set -eux; \
+# Download and extract processmaker tarball
+	curl -o processmaker.tar.gz -fL "https://github.com/ProcessMaker/processmaker/archive/refs/tags/v$PM_VERSION.tar.gz"; \
+	tar -xzf processmaker.tar.gz --strip-components=1 -C /var/www/html/; \
+	rm processmaker.tar.gz;
+COPY docker/laravel-echo-server.json .
+COPY --chmod=644 docker/laravel-cron /etc/cron.d/laravel-cron
+COPY docker/nginx.conf /etc/nginx/nginx.conf
+COPY docker/services.conf /etc/supervisor/conf.d/services.conf
+COPY docker/laravel-echo-server.json /var/www/html/laravel-echo-server.json
+COPY docker/init.sh /var/www/html/init.sh
 
-WORKDIR /code/pm4
-RUN composer install
-COPY build-files/laravel-echo-server.json .
+RUN composer install \
+    --no-cache \
+    --no-dev \
+    --optimize-autoloader; \
+
 RUN npm install --unsafe-perm=true && npm run dev
 
-COPY build-files/laravel-echo-server.json .
-COPY build-files/init.sh .
 CMD bash init.sh && supervisord --nodaemon
