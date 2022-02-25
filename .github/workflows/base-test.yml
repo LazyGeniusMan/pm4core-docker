@@ -34,5 +34,5 @@ jobs:
         docker pull processmaker/pm4-base:1.0.0
         docker image ls
         docker image inspect pm-base:4.1-test
-     - name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
+    - name: Image digest
+      run: echo ${{ steps.docker_build.outputs.digest }}
