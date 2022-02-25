@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - Dockerfile.base
-      - .github/workdlows/base-test.yml
+      - .github/workflows/base-test.yml
 
 jobs:
 
