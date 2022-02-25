@@ -2,9 +2,8 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ optimize ]
-  pull_request:
-    branches: [ optimize ]
+    paths:
+      Dockerfile.base
 
 jobs:
 
