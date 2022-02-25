@@ -2,10 +2,8 @@ FROM ubuntu:20.04
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ="America/Los_Angeles"
 
-RUN apt update
-
 # In ubuntu 20.04, installing php without specifying a version installs 7.4 :)
-RUN apt install -y \
+RUN apt update && apt install -y \
   php \
   php-cli \
   php-fpm \
@@ -32,16 +30,15 @@ RUN apt install -y \
 #
 # node
 #
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
-RUN apt -y install nodejs
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && apt -y install nodejs
 
 #
-# install composer
+#  composer
 # 
 RUN cd /tmp &&\
     curl -sS https://getcomposer.org/installer | php && \
-    mv /tmp/composer.phar /usr/local/bin/composer
-RUN composer self-update
+    mv /tmp/composer.phar /usr/local/bin/composer && \
+    composer self-update
 
 #
 # docker client
