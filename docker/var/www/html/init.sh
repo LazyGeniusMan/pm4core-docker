@@ -32,7 +32,7 @@ set -ex
     php artisan processmaker:install --no-interaction \
       --url=${PM_APP_URL} \
       --username=${PM_ADMIN_USER} \
-      --password-${PM_ADMIN_PASS} \
+      --password=${PM_ADMIN_PASS} \
       --email=${PM_ADMIN_EMAIL} \
       --first-name=${PM_ADMIN_FNAME} \
       --last-name=${PM_ADMIN_LNAME} \
