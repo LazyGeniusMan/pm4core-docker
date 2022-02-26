@@ -29,7 +29,7 @@ jobs:
         pull: true
         push: false
         outputs: type=docker,dest=/tmp/pm-base.tar
-        tags: pm-base:4.1-test
+        tags: ${{ secrets.DOCKER_HUB_ID }}/processmaker:base-4.1
         cache-from: type=gha
         cache-to: type=gha,mode=max
     - name: Image digest
@@ -70,14 +70,14 @@ jobs:
         pull: false
         push: false
         load: true
-        tags: pm:4.1.21-test
+        tags: ${{ secrets.DOCKER_HUB_ID }}/processmaker:4.1.21
         cache-from: type=gha
         cache-to: type=gha,mode=max
     - name: Check Image
       run: |
         docker pull processmaker/pm4-core:4.1.21
         docker image ls
-        docker image inspect pm:4.1.21
+        docker image inspect ${{ secrets.DOCKER_HUB_ID }}/processmaker:4.1.21
     - name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
 
