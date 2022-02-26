@@ -2,10 +2,12 @@ name: Docker Image CI
 
 on:
   push:
-    paths:
-      - Dockerfile
-      - Dockerfile.base
-      - .github/workflows/ci-cd.yml
+    paths-ignore:
+      - docker-compose.yml
+      - .env
+      - .github/workflows/test.yml
+      - README.md
+      - .gitignore
   workflow_dispatch:
 
 jobs:
