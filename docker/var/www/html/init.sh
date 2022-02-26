@@ -13,8 +13,7 @@ set -ex
 #     mysql -u pm -p'pass' -h mysql processmaker < mysqldump.sql
 # fi
 
-#if [ ! -f ".env" ]; then
-    rm -rf .env
+if [ ! -f ".env" ]; then
     while ! mysqladmin ping -u ${DB_USER} -p${DB_PASS} -h ${DB_HOST} --silent; do
         echo "Waiting for mysql"
         sleep 1
@@ -61,4 +60,4 @@ set -ex
     echo "LARAVEL_ECHO_SERVER_AUTH_HOST=${PM_APP_URL}" >> .env
     echo "SESSION_SECURE_COOKIE=false" >> .env
 
-#fi
+fi
