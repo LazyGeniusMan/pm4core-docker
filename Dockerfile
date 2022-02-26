@@ -13,6 +13,7 @@ COPY docker/nginx.conf /etc/nginx/nginx.conf
 COPY docker/services.conf /etc/supervisor/conf.d/services.conf
 COPY docker/laravel-echo-server.json /var/www/html/laravel-echo-server.json
 COPY docker/init.sh /var/www/html/init.sh
+COPY .dockerignore /var/www/html/.dockerignore
 
 RUN composer install \
     #--no-cache \
