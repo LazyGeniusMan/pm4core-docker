@@ -26,6 +26,6 @@ RUN npm install --unsafe-perm=true && npm run dev
 #
 # clean up
 # 
-RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 CMD bash init.sh && supervisord --nodaemon
