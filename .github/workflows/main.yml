@@ -1,0 +1,19 @@
+name: Test Docker Image
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Docker Login
+      uses: docker/login-action@v1.13.0
+      with:
+        username: ${{ secrets.DOCKER_HUB_ID }}
+        password: ${{ secrets.DOCKER_HUB_PAT }}
+    - name: Test Docker Image
+      run: |
+        docker-compose up
+        
