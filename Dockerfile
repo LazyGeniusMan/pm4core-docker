@@ -10,7 +10,6 @@ RUN set -eux; \
 
 RUN composer install \
     --no-dev \
-    --optimize-autoloader \
     ;
 
 RUN npm install --unsafe-perm=true && npm run dev
