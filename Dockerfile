@@ -1,4 +1,4 @@
-FROM pm4-base:4.1-test
+FROM pm-base:4.1-test
 ARG PM_VERSION=4.1.21
 
 WORKDIR /var/www/html
