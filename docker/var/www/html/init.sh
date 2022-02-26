@@ -29,7 +29,7 @@ set -ex
 #        PORT_WITH_PREFIX=":${PM_APP_PORT}"
 #    fi
 
-    php artisan processmaker:install --no-interaction} \
+    php artisan processmaker:install --no-interaction \
       --url=${PM_APP_URL} \
       --username=${PM_ADMIN_USER} \
       --password-${PM_ADMIN_PASS} \
