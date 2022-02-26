@@ -20,7 +20,5 @@ COPY /docker /
 # clean up
 # 
 RUN chmod 0644 /etc/cron.d/laravel-cron && crontab /etc/cron.d/laravel-cron &&\
-    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-FROM scratch
-COPY --from=build / /
+    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* node_modules/*
 CMD bash init.sh && supervisord --nodaemon
