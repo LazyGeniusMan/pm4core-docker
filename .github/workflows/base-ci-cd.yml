@@ -4,7 +4,7 @@ on:
   push:
     paths:
     - .github/workflows/base-ci-cd.yml
-    - Dockerfiles.base
+    - Dockerfile.base
   workflow_dispatch:
 
 jobs:
