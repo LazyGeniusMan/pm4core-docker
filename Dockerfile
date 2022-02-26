@@ -1,4 +1,4 @@
-FROM pm-base:4.1-test
+FROM lazygeniusman/processmaker:base-4.1
 ARG PM_VERSION=4.1.21
 
 WORKDIR /var/www/html
