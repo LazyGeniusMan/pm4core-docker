@@ -48,20 +48,13 @@ set -ex
       --data-name=${DB_NAME} \
       --data-username=${DB_USER} \
       --data-password=${DB_PASS} \
-      --data-schema=${DB_SCHEMA} \
       --redis-client=${REDIS_CLIENT} \
       --redis-host=${REDIS_HOST} \
-      --redis-prefix=${REDIS_PREFIX} \
       --horizon-prefix=${HORIZON_PREFIX} \
       --broadcast-driver=${BROADCAST_DRIVER} \
-      --broadcast-host=${BROADCAST_HOST} \
-      --broadcast-key=${BROADCAST_KEY} \
-      --echo-host=${ECHO_HOST} \
-      --echo-port=${ECHO_PORT} \
-      --pusher-app-id=${PUSHER_APP_ID} \
-      --pusher-app-key=${PUSHER_APP_KEY} \
-      --pusher-app-secret=${PUSHER_APP_SECRET} \
-      --pusher-cluster=${PUSHER_CLUSTER} \
+      --broadcast-host=${PM_APP_URL}} \
+      --echo-host=${PM_APP_URL} \
+      --echo-port=6001 \
 
     echo "PROCESSMAKER_SCRIPTS_DOCKER=/usr/local/bin/docker" >> .env
     echo "PROCESSMAKER_SCRIPTS_DOCKER_MODE=copying" >> .env
