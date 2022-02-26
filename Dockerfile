@@ -17,7 +17,7 @@ COPY docker/init.sh /var/www/html/init.sh
 RUN composer install \
     --no-cache \
     --no-dev \
-    --optimize-autoloader; \
+    #--optimize-autoloader;
 
 RUN npm install --unsafe-perm=true && npm run dev
 
