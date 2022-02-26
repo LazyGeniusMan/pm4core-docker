@@ -28,16 +28,16 @@ jobs:
         file: Dockerfile.base
         pull: true
         push: false
-        #load: true
+        load: true
         outputs: type=docker,dest=/tmp/pm-base.tar
         tags: pm-base:4.1-test
         cache-from: type=gha
         cache-to: type=gha,mode=max
     - name: Check Image
       run: |
-        #docker pull processmaker/pm4-base:1.0.0
-        #docker image ls
-        #docker image inspect pm-base:4.1-test
+        docker pull processmaker/pm4-base:1.0.0
+        docker image ls
+        docker image inspect pm-base:4.1-test
     - name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
     - name: Upload artifact
@@ -46,6 +46,7 @@ jobs:
         name: pm-base
         path: /tmp/pm-base.tar
   pm:
+    needs: base
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
