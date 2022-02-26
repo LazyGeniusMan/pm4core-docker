@@ -52,7 +52,7 @@ set -ex
       --redis-host=${REDIS_HOST} \
       --horizon-prefix=${HORIZON_PREFIX} \
       --broadcast-driver=${BROADCAST_DRIVER} \
-      --broadcast-host=${PM_APP_URL}} \
+      --broadcast-host=${PM_APP_URL} \
       --echo-host=${PM_APP_URL} \
       --echo-port=6001 \
 
