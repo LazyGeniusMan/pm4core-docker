@@ -23,13 +23,7 @@ set -ex
     mkdir -p /etc/nginx/ssl
     openssl req -x509 -nodes -days 365 -subj "/C=CA/ST=QC/O=Company, Inc./CN=localhost" -addext "subjectAltName=DNS:localhost" -newkey rsa:2048 -keyout /etc/nginx/ssl/custom.key -out /etc/nginx/ssl/custom.crt;
 
-    if [ "${PM_APP_PORT}" = "80" }; then
-        PORT_WITH_PREFIX=""
-    else
-        PORT_WITH_PREFIX=":${PM_APP_PORT}"
-    fi
-
-    php artisan processmaker:install --no-interaction} \
+    php artisan processmaker:install --no-interaction \
       --url=${PM_APP_URL} \
       --username=${PM_ADMIN_USER} \
       --password-${PM_ADMIN_PASS} \
