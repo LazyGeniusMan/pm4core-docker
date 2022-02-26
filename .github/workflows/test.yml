@@ -27,18 +27,12 @@ jobs:
         context: .
         file: Dockerfile.base
         pull: true
-        push: false
-        outputs: type=docker,dest=/tmp/pm-base.tar
+        push: true
         tags: ${{ secrets.DOCKER_HUB_ID }}/processmaker:base-4.1
         cache-from: type=gha
         cache-to: type=gha,mode=max
     - name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
-    - name: Upload artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: pm-base
-        path: /tmp/pm-base.tar
   pm:
     needs: base
     runs-on: ubuntu-latest
@@ -52,14 +46,8 @@ jobs:
     - name: Set up Docker Buildx
       id: buildx
       uses: docker/setup-buildx-action@v1
-    - name: Download artifact
-      uses: actions/download-artifact@v2
-      with:
-        name: pm-base
-        path: /tmp
     - name: Load image
       run: |
-        docker load --input /tmp/pm-base.tar
         docker image ls -a
     - name: Build and push
       id: docker_build
@@ -67,8 +55,8 @@ jobs:
       with:
         context: .
         file: Dockerfile
-        pull: false
-        push: false
+        pull: true
+        push: true
         load: true
         tags: ${{ secrets.DOCKER_HUB_ID }}/processmaker:4.1.21
         cache-from: type=gha
@@ -76,6 +64,7 @@ jobs:
     - name: Check Image
       run: |
         docker pull processmaker/pm4-core:4.1.21
+        docker pull processmaker/pm4-base:1.0.0
         docker image ls
         docker image inspect ${{ secrets.DOCKER_HUB_ID }}/processmaker:4.1.21
     - name: Image digest
