@@ -57,7 +57,6 @@ jobs:
         file: Dockerfile
         pull: true
         push: true
-        load: true
         tags: ${{ secrets.DOCKER_HUB_ID }}/processmaker:4.1.21
         cache-from: type=gha
         cache-to: type=gha,mode=max
