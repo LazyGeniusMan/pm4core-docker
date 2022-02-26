@@ -3,7 +3,7 @@ name: Docker Image CI
 on:
   push:
     paths:
-    - .github/workflows/base.yml
+    - .github/workflows/base-ci-cd.yml
     - Dockerfiles.base
   workflow_dispatch:
 
