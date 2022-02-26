@@ -20,6 +20,7 @@ set -ex
         sleep 1
     done
     
+    mkdir -p /etc/nginx/ssl
     openssl req -x509 -nodes -days 365 -subj "/C=CA/ST=QC/O=Company, Inc./CN=localhost" -addext "subjectAltName=DNS:localhost" -newkey rsa:2048 -keyout /etc/nginx/ssl/custom.key -out /etc/nginx/ssl/custom.crt;
 
     if [ "${PM_APP_PORT}" = "80" }; then
