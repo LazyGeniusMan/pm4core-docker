@@ -1,0 +1,67 @@
+version: "3.8"
+services:
+  web:
+    image: lazygeniusman/processmaker:${PM_VERSION}
+    environment:
+      TZ: ${TZ}
+      PM_APP_URL: ${PM_APP_URL}
+      PM_ADMIN_USER: ${PM_ADMIN_USER}
+      PM_ADMIN_PASS: ${PM_ADMIN_PASS}
+      PM_ADMIN_EMAIL: ${PM_ADMIN_EMAIL}
+      PM_ADMIN_FNAME: ${PM_ADMIN_FNAME}
+      PM_ADMIN_LNAME: ${PM_ADMIN_LNAME}
+      PM_API_TIMEOUT: ${PM_API_TIMEOUT}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      DB_DRIVER: ${DB_DRIVER}
+      REDIS_CLIENT: ${REDIS_CLIENT}
+      REDIS_HOST: ${REDIS_HOST}
+      HORIZON_PREFIX: ${HORIZON_PREFIX}
+      BROADCAST_DRIVER: ${BROADCAST_DRIVER}
+    volumes:
+      - ${PM_DOCKER_SOCK}:/var/run/docker.sock
+      - storage:/code/pm4/storage
+    networks:
+      - reverse_proxy
+      - backend
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.pm.entrypoints=websecure"
+      - "traefik.http.routers.pm.rule=Host(`pm.domain.tld`)"
+      - "traefik.http.services.pm.loadbalancer.sticky=true"
+      - "traefik.http.services.pm.loadbalancer.sticky.cookie.name=StickyCookie"
+      - "traefik.http.services.pm.loadbalancer.sticky.cookie.secure=true"
+    restart: unless-stopped
+    depends_on:
+      - mysql
+      - redis 
+  redis:
+    image: redis
+    networks:
+      - backend
+    restart: unless-stopped
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASS}
+    volumes:
+      - database:/var/lib/mysql
+    networks:
+      - backend
+    restart: unless-stopped
+      
+volumes:
+  database:
+  storage:
+  
+networks:
+  reverse_proxy:
+    external: true
+  backend:
+    internal: true
