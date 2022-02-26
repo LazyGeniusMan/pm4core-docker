@@ -60,12 +60,6 @@ jobs:
         tags: ${{ secrets.DOCKER_HUB_ID }}/processmaker:4.1.21
         cache-from: type=gha
         cache-to: type=gha,mode=max
-    - name: Check Image
-      run: |
-        docker pull processmaker/pm4-core:4.1.21
-        docker pull processmaker/pm4-base:1.0.0
-        docker image ls
-        docker image inspect ${{ secrets.DOCKER_HUB_ID }}/processmaker:4.1.21
     - name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
 
