@@ -65,7 +65,7 @@ volumes:
   database:
   storage:
   
-network:
+networks:
   reverse_proxy:
     external: true
   backend:
