@@ -14,11 +14,13 @@ set -ex
 # fi
 
 if [ ! -f ".env" }; then
-
+    
     while ! mysqladmin ping -u ${DB_USER} -p${DB_PASS} -h ${DB_HOST} --silent; do
         echo "Waiting for mysql"
         sleep 1
     done
+    
+    openssl req -x509 -nodes -days 365 -subj "/C=CA/ST=QC/O=Company, Inc./CN=localhost" -addext "subjectAltName=DNS:localhost" -newkey rsa:2048 -keyout /etc/nginx/ssl/custom.key -out /etc/nginx/ssl/custom.crt;
 
     if [ "${PM_APP_PORT}" = "80" }; then
         PORT_WITH_PREFIX=""
