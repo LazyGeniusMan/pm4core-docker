@@ -1,16 +1,31 @@
-FROM processmaker/pm4-base:1.0.0
+FROM lazygeniusman/processmaker:base-4.1 as build
+ARG PM_VERSION=4.1.21
 
-ARG PM_VERSION
+WORKDIR /var/www/html
+RUN set -eux; \
+# Download and extract processmaker tarball
+	curl -o processmaker.tar.gz -fL "https://github.com/ProcessMaker/processmaker/archive/refs/tags/v$PM_VERSION.tar.gz"; \
+	tar -xzf processmaker.tar.gz --strip-components=1 -C /var/www/html/; \
+	rm processmaker.tar.gz; \
+    rm -rf \
+        .circleci \
+        .git \
+        .gitbook \
+        .github \
+        docs \
+        getting-started \
+        homestead \
+        jest \
+        tests
 
-WORKDIR /tmp
-RUN wget https://github.com/ProcessMaker/processmaker/archive/refs/tags/v${PM_VERSION}.zip
-RUN unzip v${PM_VERSION}.zip && rm -rf /code/pm4 && mv processmaker-${PM_VERSION} /code/pm4
+RUN composer install \
+    --no-cache \
+    #--no-dev \
+    #--optimize-autoloader \
+    && rm -rf /tmp/* /var/tmp/*
 
-WORKDIR /code/pm4
-RUN composer install
-COPY build-files/laravel-echo-server.json .
-RUN npm install --unsafe-perm=true && npm run dev
+RUN npm install --unsafe-perm=true && npm run prod && rm -rf node_modules
+COPY /docker /
 
-COPY build-files/laravel-echo-server.json .
-COPY build-files/init.sh .
+RUN chmod 0644 /etc/cron.d/laravel-cron && crontab /etc/cron.d/laravel-cron;
 CMD bash init.sh && supervisord --nodaemon

@@ -2,8 +2,6 @@ version: "3.8"
 services:
   web:
     image: lazygeniusman/processmaker:${PM_VERSION}
-    expose:
-      - 80
     environment:
       TZ: ${TZ}
       PM_APP_URL: ${PM_APP_URL}
@@ -27,7 +25,15 @@ services:
       - ${PM_DOCKER_SOCK}:/var/run/docker.sock
       - storage:/code/pm4/storage
     networks:
+      - reverse_proxy
       - backend
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.pm.entrypoints=websecure"
+      - "traefik.http.routers.pm.rule=Host(`pm.domain.tld`)"
+      - "traefik.http.services.pm.loadbalancer.sticky=true"
+      - "traefik.http.services.pm.loadbalancer.sticky.cookie.name=StickyCookie"
+      - "traefik.http.services.pm.loadbalancer.sticky.cookie.secure=true"
     restart: unless-stopped
     depends_on:
       - mysql
