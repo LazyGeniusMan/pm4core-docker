@@ -15,8 +15,8 @@ COPY docker/laravel-echo-server.json /var/www/html/laravel-echo-server.json
 COPY docker/init.sh /var/www/html/init.sh
 
 RUN composer install \
-    #--no-cache \
-    --no-dev \
+    --no-cache \
+    --no-dev; \
     #--optimize-autoloader;
 
 RUN npm install --unsafe-perm=true && npm run dev
