@@ -9,8 +9,8 @@ RUN set -eux; \
 	rm processmaker.tar.gz;
 
 RUN composer install \
-    #--no-cache \
-    --no-dev \
+    --no-cache \
+    #--no-dev \
     #--optimize-autoloader \
     && rm -rf /tmp/* /var/tmp/*
 
