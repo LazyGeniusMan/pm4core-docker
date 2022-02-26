@@ -9,7 +9,6 @@ RUN set -eux; \
 	rm processmaker.tar.gz;
 
 RUN composer install \
-    --no-cache \
     --no-dev \
     --optimize-autoloader \
     ;
