@@ -27,6 +27,7 @@ jobs:
         file: Dockerfile.base
         pull: true
         push: false
+        load: true
         tags: pm-base:4.1-test
         cache-from: type=gha
         cache-to: type=gha,mode=max
