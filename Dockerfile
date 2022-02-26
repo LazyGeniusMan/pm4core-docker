@@ -1,4 +1,4 @@
-FROM lazygeniusman/processmaker:base-4.1
+FROM lazygeniusman/processmaker:base-4.1 as build
 ARG PM_VERSION=4.1.21
 
 WORKDIR /var/www/html
@@ -21,5 +21,6 @@ COPY /docker /
 # 
 RUN chmod 0644 /etc/cron.d/laravel-cron && crontab /etc/cron.d/laravel-cron &&\
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
+FROM scratch
+COPY --from=build / /
 CMD bash init.sh && supervisord --nodaemon
