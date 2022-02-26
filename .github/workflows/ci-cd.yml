@@ -5,7 +5,8 @@ on:
     paths:
       - Dockerfile
       - Dockerfile.base
-      - .github/workflows/test.yml
+      - .github/workflows/ci-cd.yml
+  workflow_dispatch:
 
 jobs:
   base:
