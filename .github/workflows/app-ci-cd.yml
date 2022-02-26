@@ -3,6 +3,7 @@ name: App Docker Image CI
 on:
   push:
     paths-ignore:
+      - Dockerfile.base
       - docker-compose.yml
       - .env
       - .github/workflows/test.yml
