@@ -10,7 +10,7 @@ RUN set -eux; \
 
 RUN composer install \
     #--no-cache \
-    #--no-dev \
+    --no-dev \
     #--optimize-autoloader \
     && rm -rf /tmp/* /var/tmp/*
 
