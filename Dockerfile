@@ -7,13 +7,6 @@ RUN set -eux; \
 	curl -o processmaker.tar.gz -fL "https://github.com/ProcessMaker/processmaker/archive/refs/tags/v$PM_VERSION.tar.gz"; \
 	tar -xzf processmaker.tar.gz --strip-components=1 -C /var/www/html/; \
 	rm processmaker.tar.gz;
-COPY docker/laravel-echo-server.json .
-COPY --chmod=644 docker/laravel-cron /etc/cron.d/laravel-cron
-COPY docker/nginx.conf /etc/nginx/nginx.conf
-COPY docker/services.conf /etc/supervisor/conf.d/services.conf
-COPY docker/laravel-echo-server.json /var/www/html/laravel-echo-server.json
-COPY docker/init.sh /var/www/html/init.sh
-COPY .dockerignore /var/www/html/.dockerignore
 
 RUN composer install \
     #--no-cache \
@@ -22,10 +15,11 @@ RUN composer install \
     ;
 
 RUN npm install --unsafe-perm=true && npm run dev
-
+COPY /docker /
 #
 # clean up
 # 
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN chmod 0644 /etc/cron.d/laravel-cron && crontab /etc/cron.d/laravel-cron &&\
+    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 CMD bash init.sh && supervisord --nodaemon
