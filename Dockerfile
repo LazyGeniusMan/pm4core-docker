@@ -12,12 +12,10 @@ RUN composer install \
     #--no-cache \
     #--no-dev \
     #--optimize-autoloader \
-    ;
+    && rm -rf /tmp/* /var/tmp/*
 
 RUN npm install --unsafe-perm=true && npm run dev && rm -rf node_modules
 COPY /docker /
-#
-# clean up
-# 
+
 RUN chmod 0644 /etc/cron.d/laravel-cron && crontab /etc/cron.d/laravel-cron;
 CMD bash init.sh && supervisord --nodaemon
