@@ -15,5 +15,6 @@ jobs:
         password: ${{ secrets.DOCKER_HUB_PAT }}
     - name: Test Docker Image
       run: |
+        docker network create reverse_proxy
         docker-compose up
         
