@@ -14,7 +14,7 @@ RUN composer install \
     #--optimize-autoloader \
     && rm -rf /tmp/* /var/tmp/*
 
-RUN npm install --unsafe-perm=true && npm run dev && rm -rf node_modules
+RUN npm install --unsafe-perm=true && npm run prod && rm -rf node_modules
 COPY /docker /
 
 RUN chmod 0644 /etc/cron.d/laravel-cron && crontab /etc/cron.d/laravel-cron;
