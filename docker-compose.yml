@@ -2,8 +2,8 @@ version: "3.8"
 services:
   web:
     image: lazygeniusman/processmaker:${PM_VERSION}
-    expose:
-      - 80
+    ports:
+      - "8080:80"
     environment:
       TZ: ${TZ}
       PM_APP_URL: ${PM_APP_URL}
@@ -26,16 +26,12 @@ services:
     volumes:
       - ${PM_DOCKER_SOCK}:/var/run/docker.sock
       - storage:/code/pm4/storage
-    networks:
-      - backend
     restart: unless-stopped
     depends_on:
       - mysql
       - redis 
   redis:
     image: redis
-    networks:
-      - backend
     restart: unless-stopped
   mysql:
     image: mysql:5.7
@@ -46,16 +42,8 @@ services:
       MYSQL_PASSWORD: ${DB_PASS}
     volumes:
       - database:/var/lib/mysql
-    networks:
-      - backend
     restart: unless-stopped
       
 volumes:
   database:
   storage:
-  
-networks:
-  reverse_proxy:
-    external: true
-  backend:
-    internal: true
