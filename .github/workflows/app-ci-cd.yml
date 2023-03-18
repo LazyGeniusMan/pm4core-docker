@@ -1,16 +1,15 @@
 name: App Docker Image CI
 
 on:
-  push:
-    paths-ignore:
-      - Dockerfile.base
-      - docker-compose.yml
-      - .env
-      - .github/workflows/test.yml
-      - .github/workflows/base-ci-cd.yml
-      - README.md
-      - .gitignore
-      
+#  push:
+#    paths-ignore:
+#      - Dockerfile.base
+#      - docker-compose.yml
+#      - .env
+#      - .github/workflows/test.yml
+#      - .github/workflows/base-ci-cd.yml
+#      - README.md
+#      - .gitignore     
   workflow_dispatch:
 
 jobs:
@@ -34,7 +33,7 @@ jobs:
         file: Dockerfile
         pull: true
         push: true
-        tags: ${{ secrets.DOCKER_HUB_ID }}/processmaker:4.1.21
+        tags: ${{ secrets.DOCKER_HUB_ID }}/processmaker:4.1.21-r1
         cache-from: type=gha
         cache-to: type=gha,mode=max
     - name: Image digest
